@@ -8,6 +8,7 @@ const w = require('./weather')
  * @param {!Object} res Cloud Function response context.
  */
 exports.flightStatus = (req, res) => {
+  res.setHeader('Content-Type', 'application/json')
   res.send(200, {
     flight: 'LA2012',
     date: '2018-05-18',
