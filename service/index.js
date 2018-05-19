@@ -1,5 +1,6 @@
-const fs = require('./flightStatus')
-const w = require('./weather')
+const fs = require('./flightStatus');
+const w = require('./weather');
+const Promise = require('bluebird');
 
 /**
  * Responds a flight status with weather data.
@@ -8,32 +9,39 @@ const w = require('./weather')
  * @param {!Object} res Cloud Function response context.
  */
 exports.flightStatus = (req, res) => {
-  res.setHeader('Content-Type', 'application/json')
-  res.send(200, {
-    flight: 'LA2012',
-    date: '2018-05-18',
-    origin: {
-      city: 'Santiago',
-      fullAirport: 'Arturo Merino Benitez',
-      code: 'SCL'
-    },
-    destination: {
-      city: 'Antofagasta',
-      fullAirport: 'Andres Sabella',
-      code: 'ANF'
-    },
-    status: 'On-Time',
-    weather: {
+
+  Promise.all([
+    fs.get(),
+    w.get()
+  ]).then((responses) => {
+    res.setHeader('Content-Type', 'application/json')
+    res.send(200, {
+      responses,
+      flight: 'LA2012',
+      date: '2018-05-18',
       origin: {
-        description: 'Cloudy sky',
-        temperature: '23',
-        icon: '04n'
+        city: 'Santiago',
+        fullAirport: 'Arturo Merino Benitez',
+        code: 'SCL'
       },
       destination: {
-        description: 'Cloudy sky',
-        temperature: '24',
-        icon: '04n'
+        city: 'Antofagasta',
+        fullAirport: 'Andres Sabella',
+        code: 'ANF'
+      },
+      status: 'On-Time',
+      weather: {
+        origin: {
+          description: 'Cloudy sky',
+          temperature: '23',
+          icon: '04n'
+        },
+        destination: {
+          description: 'Cloudy sky',
+          temperature: '24',
+          icon: '04n'
+        }
       }
-    }
-  })
+    })
+  });
 }

@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/ivolivares/awesome-flight-status/issues"
   },
-  "homepage": "https://github.com/ivolivares/awesome-flight-status#readme"
+  "homepage": "https://github.com/ivolivares/awesome-flight-status#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "request": "^2.86.0"
+  }
 }
