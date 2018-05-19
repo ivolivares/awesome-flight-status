@@ -13,7 +13,7 @@ const statuCode = require("./statusCode");
  * @param {!String} arrivalDate arrival date in format yyyy/mm/dd.
  */
 
-exports.status = {
+module.exports = {
 	get: (airLineCode, flightNumber, arrivalDate) => {
 		return new Promise((resolve, reject) => {
 			request({

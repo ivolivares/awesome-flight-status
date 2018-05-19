@@ -1,5 +1,5 @@
-const fs = require('./flightStatus');
-const w = require('./weather');
+const fs = require('./flightStatus/index');
+const w = require('./weather/index');
 const Promise = require('bluebird');
 
 /**

@@ -10,7 +10,7 @@ const kelvinConversion = 273.15;
  * @param {!String} date flight date.
  */
 
-exports.weather = {
+module.exports = {
 	get: (city, date) => {
 		return new Promise((resolve, reject) => {
 			request({url: serviceUrl, 
