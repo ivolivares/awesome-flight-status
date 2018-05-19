@@ -11,8 +11,8 @@ const Promise = require('bluebird');
 exports.flightStatus = (req, res) => {
 
   Promise.all([
-    fs.get(),
-    w.get()
+    fs.get('LA', 600, '2018/05/19'),
+    w.get('santiago', '2018/05/19')
   ]).then((responses) => {
     res.setHeader('Content-Type', 'application/json')
     res.send(200, {
