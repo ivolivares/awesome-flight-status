@@ -9,14 +9,16 @@ const Promise = require('bluebird');
  * @param {!Object} res Cloud Function response context.
  */
 exports.flightStatus = (req, res) => {
-
+  console.log("init");
+  console.log(fs);
+  console.log(w);
   Promise.all([
     fs.get('LA', 600, '2018/05/19'),
     w.get('santiago', '2018/05/19')
   ]).then((responses) => {
     res.setHeader('Content-Type', 'application/json')
     res.send(200, {
-      responses,
+      responses: responses,
       flight: 'LA2012',
       date: '2018-05-18',
       origin: {
