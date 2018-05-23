@@ -21,6 +21,7 @@ exports.flightStatus = (req, res) => {
 
   fs.get(operator, number, date).then(function(argument) {
     res.setHeader('Content-Type', 'application/json');
+    res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
     res.status(200);
     const originWeather = w.get(
       argument.origin.city,
