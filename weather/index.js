@@ -4,7 +4,7 @@ const appid="4280784848e86fecab85725d3bed2c5c";
 const kelvinConversion = 273.15;
 const _ = require("lodash");
 const moment = require("moment");
-
+const iconUrl = "http://openweathermap.org/img/w/";
 
 
 
@@ -32,7 +32,7 @@ module.exports = {
 				
 				const result = JSON.parse(body);
 
-				const day = _.first(result.list.filter((d) => moment(date, "DD/MM/YYYY hh:mm:ss").unix() > d.dt ));
+				const day = _.first(result.list.filter((d) => moment(date, "DD/MM/YYYY HH:mm:ss").unix() > d.dt ));
 				
 
 				const weather = result
@@ -40,10 +40,9 @@ module.exports = {
 				objResult[oD] = {
 					temperature: (day.main.temp - kelvinConversion).toFixed(1),
 					description: _.first(day.weather).description,
-					icon: _.first(day.weather).icon
+					icon: `${iconUrl}${_.first(day.weather).icon}.png`
 
 				}
-				console.log(objResult);
 				resolve(objResult);
 			});
 		});

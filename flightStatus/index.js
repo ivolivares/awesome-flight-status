@@ -18,7 +18,7 @@ module.exports = {
 	get: (airLineCode, flightNumber, arrivalDate) => {
 		return new Promise((resolve, reject) => {
 			const url = `${serviceUrl}${airLineCode}/${flightNumber}/arr/${arrivalDate}`
-			console.log(url)
+			
 			request({
 				url,
 				qs: {
@@ -51,14 +51,14 @@ module.exports = {
 						status: statuCode[origin.status].text,
 						city: departureAirport.city,
 						fullAirport: departureAirport.name,
-						departureDate : moment(origin.departureDate.dateLocal).format("DD/MM/YYYY hh:00:00")
+						departureDate : moment(origin.departureDate.dateLocal).format("DD/MM/YYYY HH:00:00")
 					},
 					destination: {
 						code: destination.arrivalAirportFsCode,
 						status: statuCode[destination.status].text,
 						city: arrivalAirport.city,
 						fullAirport: arrivalAirport.name,
-						arrivalDate : moment(destination.arrivalDate.dateLocal).format("DD/MM/YYYY hh:00:00")
+						arrivalDate : moment(destination.arrivalDate.dateLocal).format("DD/MM/YYYY HH:00:00")
 					}
 				}
 
