@@ -30,6 +30,11 @@ module.exports = {
 				}
 			}, (error, response, body) => {
 				
+				if(error) {
+					reject(error)
+					return;
+				}
+
 				const result = JSON.parse(body);
 
 				const day = _.first(result.list.filter((d) => moment(date, "DD/MM/YYYY HH:mm:ss").unix() > d.dt ));
