@@ -19,7 +19,7 @@ const iconUrl = "http://openweathermap.org/img/w/";
  */
 
 module.exports = {
-	get: (city, date, oD) => {
+	get: (city, date, airport) => {
 				
 		return new Promise((resolve, reject) => {
 			
@@ -41,8 +41,8 @@ module.exports = {
 				
 
 				const weather = result
-				const objResult = {};
-				objResult[oD] = {
+				const objResult = {
+					airport,
 					temperature: (day.main.temp - kelvinConversion).toFixed(1),
 					description: _.first(day.weather).description,
 					icon: `${iconUrl}${_.first(day.weather).icon}.png`
