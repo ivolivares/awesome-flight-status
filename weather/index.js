@@ -37,7 +37,7 @@ module.exports = {
 
 				const result = JSON.parse(body);
 
-				const day = _.first(result.list.filter((d) => moment(date, "DD/MM/YYYY HH:mm:ss").unix() > d.dt ));
+				const day = _.first(result.list.filter((d) => moment(date).unix() > d.dt ));
 				
 
 				const weather = result
