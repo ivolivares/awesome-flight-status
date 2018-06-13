@@ -20,6 +20,8 @@ exports.flightStatus = (req, res) => {
 
   fs.get(operator, number, date).then(function (flightsStatus) {
     res.setHeader('Content-Type', 'application/json');
+    res.set('Access-Control-Allow-Origin', "*")
+    res.set('Access-Control-Allow-Methods', 'GET')
     res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
     res.status(200);
 

@@ -18,7 +18,7 @@ const moment = require("moment");
 module.exports = {
 	get: (airLineCode, flightNumber, arrivalDate) => {
 		return new Promise((resolve, reject) => {
-			const url = `${serviceUrl}${airLineCode}/${flightNumber}/arr/${arrivalDate}`
+			const url = `${serviceUrl}${airLineCode}/${flightNumber}/arr/${moment(arrivalDate).format("YYYY/MM/DD") }`
 
 			request({
 				url,
