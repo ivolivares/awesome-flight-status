@@ -1,5 +1,4 @@
 const fs = require('./flightStatus/index');
-const w = require('./weather/index');
 const Promise = require('bluebird');
 const _ = require("lodash");
 
@@ -19,28 +18,27 @@ exports.flightStatus = (req, res) => {
     date
   }
 
-  fs.get(operator, number, date).then(function(argument) {
+  fs.get(operator, number, date).then(function (flightsStatus) {
     res.setHeader('Content-Type', 'application/json');
     res.set('Cache-Control', 'public, max-age=300, s-maxage=600');
     res.status(200);
-    const originWeather = w.get(
-      argument.origin.city,
-      argument.origin.departureDate,
-      "origin")
-    const destinationWeather = w.get(
-      argument.destination.city,
-      argument.destination.arrivalDate,
-      "destination")
 
-    Promise.all([originWeather, destinationWeather]).then((weatherResults) => {
+
+    Promise.all(flightsStatus.weatherPromises).then((weatherResults) => {
+      delete flightsStatus.weatherPromises;
+
+      const airports = flightsStatus.airports.map((a) => {
+        const w = _.head(weatherResults.filter(w => w.airport === a.code));
+        delete w.airport;
+        a.weather = w;
+        return a
+      });
+
+
       res.send(
         _.merge(
-          response,
-          argument, {
-            weather: _.merge(
-              _.first(weatherResults),
-              _.last(weatherResults)
-            )
+          response,{
+            airports : airports
           }
         ));
     });
