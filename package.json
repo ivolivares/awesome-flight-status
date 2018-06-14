@@ -2,20 +2,23 @@
   "name": "awesome-flight-status",
   "version": "1.0.0",
   "description": "Awesome Flight Status info in a Google Cloud Function",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "debug": "functions debug flightStatus",
-    "deploy": "functions deploy flightStatus --trigger-http",
+    "dev": "functions deploy flightStatus --trigger-http",
     "logs": "functions logs read --l=100",
     "start-emulator": "functions start",
-    "status": "functions status",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ivolivares/awesome-flight-status.git"
   },
-  "author": "",
+  "contributors": [
+    "Iván Olivares <hi@iolivares.com> (https://iolivares.com/)",
+    "Felipe Velasquez <felipe.velasquezc@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ivolivares/awesome-flight-status/issues"
@@ -23,9 +26,11 @@
   "homepage": "https://github.com/ivolivares/awesome-flight-status#readme",
   "dependencies": {
     "bluebird": "^3.5.1",
+    "http-status": "^1.2.0",
     "lodash": "^4.17.10",
     "moment": "^2.22.1",
-    "request": "^2.86.0"
+    "request": "^2.86.0",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "@google-cloud/functions-emulator": "^1.0.0-beta.4"

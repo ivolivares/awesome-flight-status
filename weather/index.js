@@ -6,11 +6,6 @@ const _ = require("lodash");
 const moment = require("moment");
 const iconUrl = "http://openweathermap.org/img/w/";
 
-
-
-
-
-
 /**
  * Responds the weather data.
  *
@@ -36,9 +31,7 @@ module.exports = {
 				}
 
 				const result = JSON.parse(body);
-
 				const day = _.first(result.list.filter((d) => moment(date).unix() > d.dt ));
-				
 
 				const weather = result
 				const objResult = {
