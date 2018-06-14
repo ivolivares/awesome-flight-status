@@ -4,6 +4,11 @@
   "description": "Awesome Flight Status info in a Google Cloud Function",
   "main": "index.js",
   "scripts": {
+    "debug": "functions debug flightStatus",
+    "deploy": "functions deploy flightStatus --trigger-http",
+    "logs": "functions logs read --l=100",
+    "start-emulator": "functions start",
+    "status": "functions status",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,5 +26,8 @@
     "lodash": "^4.17.10",
     "moment": "^2.22.1",
     "request": "^2.86.0"
+  },
+  "devDependencies": {
+    "@google-cloud/functions-emulator": "^1.0.0-beta.4"
   }
 }
