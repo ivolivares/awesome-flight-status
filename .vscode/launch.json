@@ -2,10 +2,10 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": "Inspect Function",
-        "type": "node2",
+        "name": "Debug Function",
+        "type": "node",
         "request": "attach",
-        "port": 9229
+        "port": 5858
       }
     ]
   }
