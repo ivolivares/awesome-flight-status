@@ -8,6 +8,7 @@
     "debug": "functions debug flightStatus",
     "dev": "functions deploy flightStatus --trigger-http",
     "logs": "functions logs read --l=100",
+    "deploy": "gcloud functions deploy awesomeFlightStatus --entry-point=flightStatus --memory=128MB --stage-bucket flightstatus-function-src  --trigger-http",
     "start-emulator": "functions start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
