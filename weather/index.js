@@ -1,10 +1,7 @@
-const request = require("request");
-const serviceUrl = "http://api.openweathermap.org/data/2.5/forecast";
-const appid="4280784848e86fecab85725d3bed2c5c";
-const kelvinConversion = 273.15;
-const _ = require("lodash");
-const moment = require("moment");
-const iconUrl = "http://openweathermap.org/img/w/";
+const request = require("request")
+const _ = require("lodash")
+const moment = require("moment")
+const Config = require('../core/config')
 
 /**
  * Responds the weather data.
@@ -15,39 +12,45 @@ const iconUrl = "http://openweathermap.org/img/w/";
 
 module.exports = {
 	get: (city, date, airport) => {
-				
-		return new Promise((resolve, reject) => {
-			
-			request({url: serviceUrl, 
-				qs : {
-					q:city,
-					appid
-				}
-			}, (error, response, body) => {
-				
-				if(error) {
-					reject(error)
-					return;
-				}
+		return Config().then((config) => (
+			new Promise((resolve, reject) => {
+				request({
+					url: config.app.weather.serviceUrl,
+					qs: {
+						q: city,
+						appid: config.app.keys.w.appId
+					}
+				}, (error, response, body) => {
 
-				const result = JSON.parse(body);
-				const day = _.first(result.list.filter((d) => moment(date).unix() > d.dt ));
+					if (error) {
+						reject(error)
+						return
+					}
 
-				const weather = result
-				const objResult = {
-					airport,
-					temperature: (day.main.temp - kelvinConversion).toFixed(1),
-					description: _.first(day.weather).description,
-					icon: `${iconUrl}${_.first(day.weather).icon}.png`
+					const result = JSON.parse(body)
+					const day = _.first(result.list.filter((d) => moment(date).unix() > d.dt))
 
-				}
-				resolve(objResult);
-			});
-		});
+					const weather = result
+					const objResult = {
+						airport,
+						temperature: (day.main.temp - config.app.weather.kelvinConversion).toFixed(1),
+						description: _.first(day.weather).description,
+						icon: `${config.app.weather.iconUrl}${_.first(day.weather).icon}.png`
+					}
+					resolve(objResult)
+				})
+			})
+		)).catch((error) => {
+			console.log(error)
+			return new Promise((resolve, reject) =>
+				reject({
+					status: {
+						code: httpStatus.INTERNAL_SERVER_ERROR,
+						message: 'Config error flight weather'
+					},
+					error
+				})
+			)
+		})
 	}
-}; 
-
-
-
-
-
+} 

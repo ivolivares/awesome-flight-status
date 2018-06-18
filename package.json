@@ -26,6 +26,7 @@
   "homepage": "https://github.com/ivolivares/awesome-flight-status#readme",
   "dependencies": {
     "bluebird": "^3.5.1",
+    "cloud-functions-runtime-config": "^0.4.0",
     "http-status": "^1.2.0",
     "lodash": "^4.17.10",
     "moment": "^2.22.1",
