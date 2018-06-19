@@ -6,5 +6,5 @@ steps:
 #   args: ['test']
 #   dir: 'functions/autodeploy'
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['beta', 'functions', 'deploy', 'awesomeFlightStatus', '--trigger-http']
+  args: ['beta', 'functions', 'deploy', 'awesomeFlightStatus', '--entry-point=flightStatus', '--memory=128MB', '--stage-bucket', 'flightstatus-function-src' ,'--trigger-http']
   dir: 'functions/autodeploy'
