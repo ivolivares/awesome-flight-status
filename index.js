@@ -45,8 +45,3 @@ exports.flightStatus = (req, res) =>
         return res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error)
       })
   })
-
-  exports.holaPo = (req, res) => {
-    console.log("Hola meetup GCP!")
-    res.send("Hola meetup GCP!!")
-  }
